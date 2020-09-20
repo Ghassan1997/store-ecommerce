@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/test',function (){
+            $categories = Category::child()->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+    return view('dashboard.subcategories.index', compact('categories'));
+
+});
